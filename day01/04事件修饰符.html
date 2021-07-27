@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/lib/vue.js"></script>
+    <style>
+        .inner{
+            height: 150px;
+            background-color: lightcyan;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+         <!-- //使用.stop阻止冒泡 
+        <div class="inner" @click='divHander'>
+            <input type="button" value="戳我" @click.stop='butHander'>
+        </div> -->
+
+        <!-- 使用.prevent阻止默认行为
+        <a href="http://www.baidu.com" @click.prevent='linkHander'>请找度量</a> -->
+
+        <!-- 使用.capture捕获触发机制
+        <div class="inner" @click.capture='divHander'>
+            <input type="button" value="戳我" @click.stop='butHander'>
+        </div> -->
+
+
+        <!-- 使用.self实现只有点击当前元素的时候才会触发事件函数
+        <div class="inner" @click.self='divHander'>
+            <input type="button" value="戳我" @click.stop='butHander'>
+        </div> -->
+
+        <!-- 使用.once只触发一次事件的机制
+        <a href="http://www.baidu.com" @click.once='linkHander'>请找度量</a> -->
+
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+
+            },
+            methods:{
+                divHander(){
+                    console.log("这是div");
+                },
+                butHander(){
+                    console.log("这是but");
+                },
+                linkHander(){
+                    alert("ssss");
+                }
+            }
+
+        });
+    </script>
+</body>
+</html>
