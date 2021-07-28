@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 导入vue.js -->
+    <script src="./js/lib/vue.js"> </script>
+    <style>
+        .red{
+            color: red;
+        }
+        .thin{
+            font-weight: 200;
+        }
+        .italic{
+            font-style: italic;
+        }
+        .active{
+            letter-spacing: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <!-- 将来new的vue实例会控制元素中所有内容 -->
+    <!-- vue实例控制的这个元素区域就是我们的 V -->
+    <div id="app">
+        <!-- 第一中使用方式，直接传递一个数组，注意这里的class需要用v-bind做数据绑定
+        <h1 :class="['red','italic']">这是很大的h1</h1> -->
+
+        <!-- 在数组中使用三元表达式
+        <h1 :class="['red','italic',flag?'active':'']">这是很大的h1</h1> -->
+
+
+        <!-- 在数组中使用对象来代替三元表达式，提高代码可读性
+        <h1 :class="['red','italic',{'active':flag}]">这是很大的h1</h1> -->
+
+        <!-- 在为class使用v-bind绑定对象的时候，对象的属性是类名，由于对象的属性可带引号，也可不带。属性的值时标识符 -->
+        <h1 :class="{red:true,italic:true,active:flag}">这是很大的h1</h1>
+    </div>
+    <script>
+        // 创建一个vue的实例
+        //当我们导入包后。浏览器内存中多个vue构造函数
+        // 注意：我们new 出来的这个vm 对象就是我们的VM
+        var vm = new Vue({
+            el: '#app', //表示当前我们new的实例要控制页面上的那个区
+            //这里的data就是MVVM中的M，专门用来保存数据
+            data:{//data数学中，存放的是el中要用到的数据
+                flag:true,//通过vue提供的指令很方便地渲染数据，不手动操作dom元素，不提倡手动操作dom
+                obj:{}
+            }
+        })
+    </script>
+</body>
+</html>

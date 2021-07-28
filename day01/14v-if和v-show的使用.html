@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 导入vue.js -->
+    <script src="./js/lib/vue.js"> </script>
+</head>
+<body>
+    <!-- 将来new的vue实例会控制元素中所有内容 -->
+    <!-- vue实例控制的这个元素区域就是我们的 V -->
+    <div id="app">
+        <button @click="toggle">按钮
+
+        </button>
+        <!-- v-if的特点是每次重新删除或创建
+        v-show的特点是不会重新删除或创建，只是控制display:none
+        
+        v-if有较高的切换性能消耗
+        v-show有较高的初始渲染消耗 -->
+        <h3 v-if="flag">这是用v-if控制的元素</h3>
+        <h3 v-show="flag">这是用v-show控制的元素</h3>
+    </div>
+    <script>
+        // 创建一个vue的实例
+        //当我们导入包后。浏览器内存中多个vue构造函数
+        // 注意：我们new 出来的这个vm 对象就是我们的VM
+        var vm = new Vue({
+            el: '#app', //表示当前我们new的实例要控制页面上的那个区
+            //这里的data就是MVVM中的M，专门用来保存数据
+            data:{//data数学中，存放的是el中要用到的数据
+                flag:true//通过vue提供的指令很方便地渲染数据，不手动操作dom元素，不提倡手动操作dom
+            },
+            methods:{
+                toggle(){
+                    this.flag = !this.flag;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
