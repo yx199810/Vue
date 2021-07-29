@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 导入vue.js -->
+    <script src="./js/lib/vue.js"> </script>
+</head>
+<body>
+    <!-- 将来new的vue实例会控制元素中所有内容 -->
+    <!-- vue实例控制的这个元素区域就是我们的 V -->
+    <div id="app">
+        <p>
+            {{ msg }}
+        </p>
+    </div>
+    <script>
+        // 创建一个vue的实例
+        //当我们导入包后。浏览器内存中多个vue构造函数
+        // 注意：我们new 出来的这个vm 对象就是我们的VM
+        var vm = new Vue({
+            el: '#app', //表示当前我们new的实例要控制页面上的那个区
+            //这里的data就是MVVM中的M，专门用来保存数据
+            data:{//data数学中，存放的是el中要用到的数据
+                msg:'欢迎学习vue'//通过vue提供的指令很方便地渲染数据，不手动操作dom元素，不提倡手动操作dom
+            },
+            methods:{
+
+            },
+            beforeCreate(){//这是我们遇到的第一个生命周期函数，表示实例完全被创建出来之前，会执行它
+                // console.log(this.msg)
+                // 在beforeCreate执行之前，data 和methods这些都没初始化。
+            },
+            create(){
+                //在create中，data、和methods都已经被初始化了。
+                //如果要调用methods中的方法或者操作data中的数据，最早只能在create中操作与偶
+
+            },
+            beforeMount(){
+                //这是遇到·的第三个生命周期函数表示模板已经编译完成，但是还没有渲染。
+                //在它执行的时候，页面的元素还没有被替换过来。只是之前写的模板字符
+            },
+            mounted(){
+                //这是遇到的第四个生命周期函数，表示模板已经被渲染好了
+                //注意mountde是实例创建期间的最后一个生命周期函数。
+            },
+            //接下来试运行中的链各个时间
+            beforeUpodate(){
+                //这时候，表示我们的界面还没有被更新，数据被更新了吗？数据肯定被更新了
+
+            },
+            update(){
+                //update事件执行的时候，页面和data数据已经保持同步了
+            }
+
+        })
+    </script>
+</body>
+</html>

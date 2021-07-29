@@ -30,8 +30,9 @@
                          <!-- 使用时间绑定机制，微元素指定处理函数的狮虎，加了小括号，就可以为函数传参 -->
                          <button value="添加" class="btn btn-primary" @click="add">添加</button>
 
+                         <!-- 注意vue中所有的指令，在调用的时候都用v-开头 -->
                          <label for="">搜索名称关键字
-                            <input type="text" class="form-control" v-model="keywords">
+                            <input type="text" class="form-control" v-model="keywords" v-focus>
                              </label>
                 </div>
         </div>
@@ -52,13 +53,44 @@
                 <tr v-for="item in search(keywords)" :key="item.id">
                     <td>{{item.id}}</td>
                     <td>{{item.name}}</td>
-                    <td>{{item.ctime}}</td>
+                    <td>{{item.ctime | dateFormat{yyyy-mm-dd} }}</td>
                     <td><a @click.prevent="del(item.id)">删除</a></td>
                 </tr>
             </tbody>
         </table>
     </div>
     <script>
+        //自定义指令:参数一是指令名称，定义的时候，指令前面不需要加v-前缀
+        //但是调用的时候必须加上v-
+        //参数二是一个对象，身上有和指令相关的函数
+        Vue.directive('focus',{
+            //注意，每个函数中，第一个参数都是el,表示被指定绑定的元素
+            //在元素 杠绑定指令的时候，还没有插入到DOM中去，这时候调用focus没有用。只有插入dom后，才能获取焦点
+            bind:function(el){
+                // el.focus();
+            },//每当元素被绑定到元素上的时候，会立即执行，只执行一次
+            inserted:function(el){
+                el.focus();
+            },//元素插入到dom元素，会执行1次
+            updated:function(){}//当Vnode更新的时候回执行update，可能会出发多次
+        })
+        //全局过滤器，格式化时间
+        Vue.filter('dateFormat',function(dataStr,pattern){
+            var dt = new Date(dataStr);
+            var y = dt.getFullYear();
+            var m = dt.getMonth()+1;
+            var d = dt.getDate();
+            console.log(y)
+            // return `${y}-${m}-${d}`
+            if(pattern.toLowerCase() == 'yyyy-mm-dd'){
+                return `${y}-${m}-${d}`
+            }else{
+                var hh = dt.getHours();
+                var mm = dt.getMinutes();
+                var ss = dt.getSeconds();
+                return `${y}-${m}-${d}-${hh}-${mm}-${ss}`
+            }
+        })
         // 创建一个vue的实例
         //当我们导入包后。浏览器内存中多个vue构造函数
         // 注意：我们new 出来的这个vm 对象就是我们的VM
@@ -123,6 +155,13 @@
                 }
             }
         })
+        //过滤器中的第一个参数，以及被规定死了
+        // Vue.filter('过滤器名称',function(data){
+        //     return
+        // })
     </script>
 </body>
 </html>
+
+
+<!-- 过滤器调用时候的格式{{name|nameope}} -->
