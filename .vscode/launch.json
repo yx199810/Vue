@@ -8,7 +8,7 @@
             "type": "pwa-chrome",
             "request": "launch",
             "name": "Open 01品牌列表案例.html",
-            "file": "e:\\GitShop\\Vue\\day01\\day02\\01品牌列表案例.html"
+            "file": "e:\\GitShop\\Vue\\day01\\day02\\"
         }
     ]
 }
