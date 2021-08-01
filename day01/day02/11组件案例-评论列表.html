@@ -14,7 +14,7 @@
     <!-- vue实例控制的这个元素区域就是我们的 V -->
     <div id="app">
         
-        <comment ></comment>
+        <comment @func="load"></comment>
         <ul class="list-group">
             <li class="list-group-item" v-for="item in list" :key="item.index">
                 <span class="badge">评论者：{{item.user}}</span>
@@ -66,6 +66,8 @@
                     lists.push(commen)
                     localStorage.setItem('cmts',JSON.stringify(lists))
                     this.user = this.comment ="";
+                    this.$emit('func')
+
                 }
             }
         }
@@ -83,11 +85,16 @@
             components:{
                 comment
             },
+            created(){
+                this.load();
+            },
             methods:{
-                poss(data){
-                    this.list.push(data)
+                load(){//从本地localstorage获取列表
+                    var list = JSON.parse(localStorage.getItem('cmts')||'[]')
+                    this.list = list
                 }
-            }
+            },
+
         })
     </script>
 </body>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 导入vue.js -->
+    <script src="../day02/lib/vue.js"> </script>
+    <script src="../day02/lib/vue-router.js"></script>
+</head>
+<style>
+    html body{
+        margin: 0;
+        padding: 0;
+    }
+    h1{
+        margin: 0;
+        padding: 0;
+    }
+    .header{
+        height: 100px;
+        background-color: blue;
+    }
+    .container{
+        display: flex;
+    }
+    .left{
+        height: 600px;
+        flex: 1;
+        background-color: lightblue;
+    }
+    .main{
+        height: 600px;
+        flex: 9;
+        background-color: lightcoral;
+    }
+
+</style>
+<body>
+    <!-- 将来new的vue实例会控制元素中所有内容 -->
+    <!-- vue实例控制的这个元素区域就是我们的 V -->
+    <div id="app">
+
+        <router-view></router-view>
+        <div class="container">
+            <router-view name="left"></router-view>
+            <router-view name="main"></router-view>
+        </div>
+    </div>
+    <script>
+        var header = {
+            template:'<h1 class="header">我是头部</h1>'
+
+        }
+        var left = {
+            template:'<h1 class="left">我是左边的区域</h1>'
+
+        }
+        var main = {
+            template:'<h1 class="main">我是主体的区域</h1>'
+
+        }
+
+
+        var router = new VueRouter({
+            routes:[
+                // {path:'/',component:header},
+                // {path:'/left',component:left},
+                // {path:'/main',component:main}
+                {path:'/',components:{
+                    'default':header,
+                    'left':left,
+                    'main':main
+                }},
+
+            ]
+        })
+        // 创建一个vue的实例
+        //当我们导入包后。浏览器内存中多个vue构造函数
+        // 注意：我们new 出来的这个vm 对象就是我们的VM
+        var vm = new Vue({
+            el: '#app', //表示当前我们new的实例要控制页面上的那个区
+            //这里的data就是MVVM中的M，专门用来保存数据
+            data:{//data数学中，存放的是el中要用到的数据
+                msg:'欢迎学习vue'//通过vue提供的指令很方便地渲染数据，不手动操作dom元素，不提倡手动操作dom
+            },
+            router
+        })
+    </script>
+</body>
+</html>

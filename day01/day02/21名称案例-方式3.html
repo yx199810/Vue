@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 导入vue.js -->
+    <script src="../day02/lib/vue.js"></script>
+    <script src="../day02/lib/vue-router.js"></script>
+</head>
+<body>
+    <!-- 将来new的vue实例会控制元素中所有内容 -->
+    <!-- vue实例控制的这个元素区域就是我们的 V -->
+    <div id="app">
+        <!-- 要监听文本框数据改变
+        1.
+        -->
+
+        <input type="text" name="" id="" v-model="firstname"> +
+        <input type="text" name="" id="" v-model="lastname"> =
+        <input type="text" name="" id="" v-model="fullname">
+    </div>
+    <script>
+        var text1 = {
+            template:'<input type="text"></input>'
+        }
+        var text2 = {
+            template:'<input type="text"></input>'
+        }
+        var text3 = {
+            template:'<input type="text"></input>'
+        }
+        // 创建一个vue的实例
+        //当我们导入包后。浏览器内存中多个vue构造函数
+        // 注意：我们new 出来的这个vm 对象就是我们的VM
+        var vm = new Vue({
+            el: '#app', //表示当前我们new的实例要控制页面上的那个区
+            //这里的data就是MVVM中的M，专门用来保存数据
+            data:{//data数学中，存放的是el中要用到的数据
+                firstname:'',
+                lastname:'',
+            },
+            methods:{
+            },
+            computed:{//在computed中，可以定义一些属性，这些属性，叫做计算属性。计算属性的本质就是一个方法，只不过，我们在使用
+                //这些计算属性的时候，是把它们的名称直接当做属性来使用的，并不会把计算属性，当做方法去调用
+
+                //注意：计算属性在引用的狮虎，一定不要加（）去调用，直接把它当做普通属性去适应就好了
+                //注意：只要计算属性，这个function内部，所用到的任何data中的数据发生了变化，就会重新计算，这个计算属性的值·
+                //注意：计算属性的求值结果，会被缓存起来，方便下次直接使用：如果计算属性方法中，所有的任何数据都没发生过变化，不会重新对计算属性求值
+
+
+
+                "fullname":function(){
+                    return this.firstname+'-'+this.lastname
+                }
+            }
+        })
+    </script>
+</body>
+</html>
